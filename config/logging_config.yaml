@@ -1,0 +1,39 @@
+# Comprehensive Logging Configuration
+
+# Уровень логирования определяет минимальный уровень логов, которые будут записываться.
+# Возможные значения: DEBUG, INFO, WARNING, ERROR, CRITICAL
+log_level: DEBUG
+
+# Формат логов определяет, как будет выглядеть каждая запись лога.
+# Пример формата: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+log_format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+
+# Настройки ротации файлов логов
+# 'daily' - ежедневная ротация, 'weekly' - еженедельная, 'monthly' - ежемесячная
+rotation: daily
+
+# Количество резервных файлов логов, которые будут храниться (например, 5)
+backup_count: 5
+
+# Настройка различных типов логов
+# 'file' - лог в файл, 'console' - вывод логов в консоль
+handlers:
+  - type: file
+    filename: logs/app.log
+    encoding: utf-8
+    level: DEBUG
+    formatter: simple
+    # Уровень логирования для этого обработчика
+    # 'file' будет записывать все логи от DEBUG и выше
+
+  - type: console
+    level: ERROR
+    # Уровень логирования для консольного обработчика
+    # 'console' будет выводить только логи от ERROR и выше
+
+# Форматтеры для различных типов логов
+formatters:
+  simple:
+    format: '%(asctime)s - %(levelname)s - %(message)s'
+  detailed:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s - [%(filename)s:%(lineno)d]'
