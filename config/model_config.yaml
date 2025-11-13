@@ -1,0 +1,38 @@
+# Конфигурация архитектуры модели CNN-LSTM-Attention
+
+model:
+  type: "CNN-LSTM-Attention"  # Тип модели
+   
+  # Конфигурация свёрточных слоёв
+  conv_layers:
+    - filters: 32
+      kernel_size: 3
+      activation: "relu"  # Функция активации ReLU
+      pool_size: 2
+    - filters: 64
+      kernel_size: 3
+      activation: "relu"  # Функция активации ReLU
+      pool_size: 2
+
+  # Конфигурация LSTM слоя
+  lstm_layer:
+    units: 128
+    return_sequences: true  # Возвращаем последовательности для будущего слоя
+
+  # Конфигурация слоя внимания
+  attention_layer:
+    units: 64
+
+  # Конфигурация выходного слоя
+  dense_layer:
+    units: 5  # Количество классов для классификации
+    activation: "softmax"  # Функция активации softmax для многоклассовой классификации
+
+optimizer:
+  name: "adam"  # Оптимизатор Adam
+  learning_rate: 0.001  # Темп обучения
+
+# Настройки ансамбля
+ensemble:
+  use: true  # Использование ансамбля
+  methods: ["bagging", "boosting"]  # Методы ансамблирования
